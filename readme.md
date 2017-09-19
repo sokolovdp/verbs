@@ -1,7 +1,7 @@
 # verbs_usage
 
 **usage_verbs.py** check folder with .py files to list most common verbs used in functions names
-and print them to standard output short statistics. 
+and print them to standard output with short statistics. 
 It can be used as standalone program, or to be imported as module
 
 ## Sample output when run as standalone program
