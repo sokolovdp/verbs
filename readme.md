@@ -28,6 +28,6 @@ if __name__ == '__main__':
 ```
 
 ## Requirements
-**usage_verbs.py** is written in Python 3.6.1, and requires module ***pos_tag** from package **nltk** ver 3.2.4
+**usage_verbs.py** is written in Python 3.6.1, and requires module **pos_tag** from package **nltk** ver 3.2.4
 
 
