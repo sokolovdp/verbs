@@ -15,7 +15,7 @@ Process finished with exit code 0
 
 ## Using as external module
 
-function find_verbs_in_python_code has 2 kew word arguments:
+function **find_verbs_in_python_code** has 2 kew word arguments:
 - path_name - path to directory to be checked
 - max_common - number of most common verbs to be found, default value is 5
 ```
