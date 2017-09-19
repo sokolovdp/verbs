@@ -55,7 +55,7 @@ def find_verbs_in_python_code(path_name="", max_common=5):
 
     most_common_verbs = Counter(all_used_verbs).most_common(max_common)
 
-    print("{} .py files, used {} verbs in function names({} unique), {} most common verbs are: {}".format(
+    print("checked {} .py files, found {} functions with verbs in names({} unique verbs), {} most common verbs are: {}".format(
         len(all_python_files),
         len(all_used_verbs),
         len(set(all_used_verbs)),

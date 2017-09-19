@@ -8,7 +8,7 @@ It can be used as standalone program, or to be imported as module
 ```
 python usage_verbs.py test_folder
 
-11 .py files, used 33 verbs in function names(6 unique), 5 most common verbs are: [('get', 21), ('take', 4), ('make', 3), ('save', 3), ('remove', 1)]
+checked 11 .py files, found 33 functions with verbs in names(6 unique verbs), 5 most common verbs are: [('get', 21), ('take', 4), ('make', 3), ('save', 3), ('remove', 1)]
 
 Process finished with exit code 0
 ```
