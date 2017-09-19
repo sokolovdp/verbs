@@ -1,7 +1,8 @@
 # verbs_usage
 
 **usage_verbs.py** check folder with .py files to list most common verbs used in functions names
-and print to standard output short statistics. It can be used as standalone program, or to be imported
+and print them to standard output short statistics. 
+It can be used as standalone program, or to be imported as module
 
 ## Sample output when run as standalone program
 ```
@@ -20,7 +21,6 @@ function find_verbs_in_python_code has 2 kew word arguments:
 ```
 import sys
 from verbs_usage import find_verbs_in_python_code
-
 
 if __name__ == '__main__':
     python_project_directory = sys.argv[1]
