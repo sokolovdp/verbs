@@ -10,12 +10,11 @@ python usage_verbs.py test_folder
 
 checked 11 .py files, found 33 functions with verbs in names(6 unique verbs), 5 most common verbs are: [('get', 21), ('take', 4), ('make', 3), ('save', 3), ('remove', 1)]
 
-Process finished with exit code 0
 ```
 
 ## Using as external module
 
-function **find_verbs_in_python_code** has 2 kew word arguments:
+function **find_verbs_in_python_code** has 2 key word arguments:
 - path_name - path to directory to be checked
 - max_common - number of most common verbs to be found, default value is 5
 ```
@@ -28,6 +27,19 @@ if __name__ == '__main__':
 ```
 
 ## Requirements
-**usage_verbs.py** is written in Python 3.6.1, and requires module **pos_tag** from package **nltk** ver 3.2.4
+**usage_verbs.py** is written in Python 3.6.1 
+It requires module **pos_tag** from package **nltk** ver 3.2.4
 
+## Installation
+install nltk package:
+```
+pip install nltk
+```
+
+install pos_tag through **nltk.download()**
+```
+python
+>>>nltk.download()
+# in the downloader menu make sure that maxent_treebank module is installed
+```
 
