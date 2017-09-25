@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
 import os
 import ast
 from collections import Counter
 from nltk import pos_tag
+
+# from memory_profiler import profile
 
 
 def build_list_of_python_files_in_the_path(path_name: "str") -> "list":
@@ -55,12 +58,13 @@ def find_verbs_in_python_code(path_name="", max_common=5):
 
     most_common_verbs = Counter(all_used_verbs).most_common(max_common)
 
-    print("checked {} .py files, found {} functions with verbs in names({} unique verbs), {} most common verbs are: {}".format(
-        len(all_python_files),
-        len(all_used_verbs),
-        len(set(all_used_verbs)),
-        max_common,
-        most_common_verbs)
+    print(
+        "checked {} .py files, found {} functions with verbs in names({} unique verbs), {} most common verbs are: {}".format(
+            len(all_python_files),
+            len(all_used_verbs),
+            len(set(all_used_verbs)),
+            max_common,
+            most_common_verbs)
     )
 
 
