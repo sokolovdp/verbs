@@ -5,35 +5,10 @@ import argparse
 import sys
 import chardet
 
-from nltk import pos_tag
-from collections import Counter
-
 import codeparsers
+import nameanalysator
 
 VALID_OUTPUT_TYPES = ['json', 'csv', 'con']
-
-
-# def is_verb(word: "str") -> "bool":
-#     return pos_tag([word])[0][1] == 'VB'
-#
-#
-# def pull_verbs_from_function_name(function_name: "str") -> "list":
-#     return [word for word in function_name.split('_') if word and is_verb(word)]
-#
-#
-# def build_list_of_names_from_source_code(code_file_name: "str") -> "list":
-#     with open(code_file_name, 'r', encoding='utf-8') as python_file:
-#         python_source_code = python_file.read()
-#
-#     python_run_code_tree = ast.parse(python_source_code)
-#     used_func_names = get_func_names_from_run_code_tree(python_run_code_tree)
-#     all_verbs = []
-#     for func_name in used_func_names:
-#         verbs = pull_verbs_from_function_name(func_name)
-#         if verbs:
-#             all_verbs.extend(verbs)
-#     return all_verbs
-#
 
 
 #     for python_file in all_python_files:
@@ -53,6 +28,7 @@ VALID_OUTPUT_TYPES = ['json', 'csv', 'con']
 #     )
 
 
+
 def load_source_code_from_file(file_name: "str") -> "str":
     with open(file_name, "rb") as file:
         raw_data = file.read()
@@ -70,16 +46,16 @@ def build_list_of_files_with_source_code(path_name="", extension="") -> "list":
     return all_code_files_in_the_path
 
 
-def analyse_folder_with_source_code(path_name: "str", parser: "codeparsers.SourceCodeParser") -> "list":
+def parse_source_code_in_folder(path_name: "str", parser: "codeparsers.SourceCodeParser") -> "list":
     all_code_files = build_list_of_files_with_source_code(path_name=path_name, extension=parser.ext)
     if not all_code_files:
         print("folder {} has no source code files with extension {}".format(path_name, parser.ext))
         return []
-    all_parsing_data = []
+    all_parsed_data = []
     for code_file in all_code_files:
         source_code = load_source_code_from_file(code_file)
-        all_parsing_data.append({'file': code_file, 'result': parser.analyse_source_code(source_code)})
-    return all_parsing_data
+        all_parsed_data.append({'file': code_file, 'result': parser.analyse_source_code(source_code)})
+    return all_parsed_data
 
 
 def check_folder_is_readable(folder_name: "str") -> "str":
@@ -124,5 +100,6 @@ if __name__ == '__main__':
 
     code_parser = codeparsers.create_code_parser(ext=args.code_ext)
 
-    analysis_data = analyse_folder_with_source_code(args.folder, code_parser)
+    parsed_data_from_all_files = parse_source_code_in_folder(args.folder, code_parser)
 
+    analysis_data, summarized_data = nameanalysator.analyse_parsed_data(parsed_data_from_all_files)
