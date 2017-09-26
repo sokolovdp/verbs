@@ -4,10 +4,14 @@ import os
 import argparse
 import sys
 import chardet
+import re
+import subprocess
 
 import codeparsers
 import wordanalysator
 import dataoutput
+
+VALID_GITHUB_REPO_URL = r'^https:\/\/(gist\.)?github\.com\/[\w\-]+\/(?P<repo>[\w\-]+)'
 
 
 def load_source_code_from_file(file_name: "str") -> "str":
@@ -61,15 +65,33 @@ def check_out_range(out_type: "str"):
     return check_arg_range(out_type, dataoutput.VALID_OUTPUT_TYPES)
 
 
+def check_github_url_validity(github_url: "str") -> "str":
+    match = re.match(VALID_GITHUB_REPO_URL, github_url)
+    if match:
+        err = subprocess.call(['git', 'clone', github_url])
+        if err:
+            raise argparse.ArgumentTypeError("can't clone GitHub repo {} error {}".format(github_url, err))
+        return match.group('repo')
+    else:
+        raise argparse.ArgumentTypeError("{}, is not a valid GitHub repo url".format(github_url))
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description='analyses use of verbs and noon in variables and functions names')
-    ap.add_argument("folder", type=check_folder_is_readable, action='store', help="folder with code to analyse")
+
+    source = ap.add_mutually_exclusive_group(required=True)  # two main parameters: folder or github repo
+    source.add_argument("--repo", dest="repo", action="store", type=check_github_url_validity,
+                        help="github(or gist) public repo to clone and analyse")
+    source.add_argument("--dir", dest="folder", action="store", type=check_folder_is_readable,
+                        help="folder with code to analyse")
+
     ap.add_argument("--ext", dest="code_ext", type=check_ext_range, action='store', default='.py',
                     help="extension of files with code")
     ap.add_argument("--top", dest="max_top", type=int, default=5, action="store",
                     help="number of top used words, default=5")
     ap.add_argument('--out', dest='out_type', type=check_out_range, action='store', default='con',
                     help="out results to JSON file, CSV file, or CONsole")
+
     # ap.add_argument("--vb", dest="check_verbs", action="store_true", help="check usage of verbs")
     # ap.add_argument("--nn", dest="check_nouns", action="store_true", help="check usage of nouns")
     # ap.add_argument('--vrbl', dest='check_vrbl', action='store_true', help="check variables names")
@@ -84,7 +106,9 @@ if __name__ == '__main__':
 
     code_parser = codeparsers.create_code_parser(ext=args.code_ext)
 
-    parsed_data_from_folder = parse_source_code_in_folder(args.folder, code_parser)
+    folder = args.folder if args.folder else args.repo
+
+    parsed_data_from_folder = parse_source_code_in_folder(folder, code_parser)
 
     full_analysis_data = wordanalysator.analyse_parsed_data(parsed_data_from_folder)
 
