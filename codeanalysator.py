@@ -7,29 +7,7 @@ import chardet
 
 import codeparsers
 import wordanalysator
-
-VALID_OUTPUT_TYPES = ['json', 'csv', 'con']
-
-
-def top_n_elements_from_sorted_dict(n: 'int', dictionary: "dict") -> "list":
-    return list(dictionary.items())[:n]
-
-
-def output_results(result_data: "dict", max_top: "int"):
-    print("Totals:")
-    print("=" * 7)
-    print("top verbs in func:", top_n_elements_from_sorted_dict(max_top, result_data['totals']['sum_func_vbs']))
-    print("top nouns in func:", top_n_elements_from_sorted_dict(max_top, result_data['totals']['sum_func_nns']))
-    print("top verbs in vars:", top_n_elements_from_sorted_dict(max_top, result_data['totals']['sum_vars_vbs']))
-    print("top nouns in vars:", top_n_elements_from_sorted_dict(max_top, result_data['totals']['sum_vars_nns']))
-    print('Details:')
-    print("=" * 8)
-    for data in result_data['details']:
-        print(" " * 2, data['file'] + ":")
-        print(" " * 4, "top verbs in func:", top_n_elements_from_sorted_dict(max_top, data['func_vbs']))
-        print(" " * 4, "top nouns in func:", top_n_elements_from_sorted_dict(max_top, data['func_nns']))
-        print(" " * 4, "top verbs in vars:", top_n_elements_from_sorted_dict(max_top, data['vars_vbs']))
-        print(" " * 4, "top nouns in vars:", top_n_elements_from_sorted_dict(max_top, data['vars_nns']))
+import dataoutput
 
 
 def load_source_code_from_file(file_name: "str") -> "str":
@@ -72,7 +50,7 @@ def check_folder_is_readable(folder_name: "str") -> "str":
 def check_arg_range(value: "str", valid_range: "list") -> "str":
     if not value.lower() in valid_range:
         raise argparse.ArgumentTypeError("wrong value {}, valid values are: {}".format(value, ', '.join(valid_range)))
-    return value
+    return value.lower()
 
 
 def check_ext_range(ext_value: "str"):
@@ -80,7 +58,7 @@ def check_ext_range(ext_value: "str"):
 
 
 def check_out_range(out_type: "str"):
-    return check_arg_range(out_type, VALID_OUTPUT_TYPES)
+    return check_arg_range(out_type, dataoutput.VALID_OUTPUT_TYPES)
 
 
 if __name__ == '__main__':
@@ -88,18 +66,21 @@ if __name__ == '__main__':
     ap.add_argument("folder", type=check_folder_is_readable, action='store', help="folder with code to analyse")
     ap.add_argument("--ext", dest="code_ext", type=check_ext_range, action='store', default='.py',
                     help="extension of files with code")
-    ap.add_argument("--top", dest="max_top", type=int, default=7, action="store", help="number of top used words")
-    ap.add_argument("--vb", dest="check_verbs", action="store_true", help="check usage of verbs")
-    ap.add_argument("--nn", dest="check_nouns", action="store_true", help="check usage of nouns")
-    ap.add_argument('--vrbl', dest='check_vrbl', action='store_true', help="check variables names")
-    ap.add_argument('--func', dest='check_func', action='store_true', help="check functions names")
+    ap.add_argument("--top", dest="max_top", type=int, default=5, action="store",
+                    help="number of top used words, default=5")
     ap.add_argument('--out', dest='out_type', type=check_out_range, action='store', default='con',
                     help="out results to JSON file, CSV file, or CONsole")
+    # ap.add_argument("--vb", dest="check_verbs", action="store_true", help="check usage of verbs")
+    # ap.add_argument("--nn", dest="check_nouns", action="store_true", help="check usage of nouns")
+    # ap.add_argument('--vrbl', dest='check_vrbl', action='store_true', help="check variables names")
+    # ap.add_argument('--func', dest='check_func', action='store_true', help="check functions names")
+
     args = ap.parse_args(sys.argv[1:])
-    if not (args.check_verbs or args.check_nouns):
-        ap.error("at least one of these arguments: --vb or --nn has to be provided")
-    if not (args.check_vrbl or args.check_func):
-        ap.error("at least one of these arguments: --var or --fun has to be provided")
+
+    # if not (args.check_verbs or args.check_nouns):
+    #     ap.error("at least one of these arguments: --vb or --nn has to be provided")
+    # if not (args.check_vrbl or args.check_func):
+    #     ap.error("at least one of these arguments: --var or --fun has to be provided")
 
     code_parser = codeparsers.create_code_parser(ext=args.code_ext)
 
@@ -107,4 +88,4 @@ if __name__ == '__main__':
 
     full_analysis_data = wordanalysator.analyse_parsed_data(parsed_data_from_folder)
 
-    output_results(full_analysis_data, args.max_top)
+    dataoutput.output_results(full_analysis_data, args.max_top, args.out_type)
