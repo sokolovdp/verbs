@@ -1,11 +1,11 @@
-def load_internal_names(filename: "str") -> "set":
+def load_words_from_file(filename: "str") -> "set":
     with open(filename, 'r') as file:
         raw_text = file.read()
     return set(raw_text.strip().replace("'", "").replace(' ', '').split(','))
 
 
 VALID_CODES_EXTENSIONS = ['.py', '.java']
-PYTHON_INTERNAL_NAMES = load_internal_names("python_built_ins")
+PYTHON_INTERNAL_NAMES = load_words_from_file("python_built_ins")  # list of names to be treated as Python internal
 JAVA_INTERNAL_NAMES = ""
 
 
