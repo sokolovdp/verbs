@@ -9,7 +9,7 @@ output_csv_file = "code_analyse_result.csv"
 def write_json_file(result_data: "dict"):
     with open(output_json_file, 'w', encoding='UTF-8') as json_file:
         json_file.write(json.dumps(result_data, sort_keys=True, indent=4, ensure_ascii=False))
-    print('created json file {} with analysis data'.format(output_json_file))
+    print('created file {} with analysis data'.format(output_json_file))
 
 
 def printable_str(list_of_tuples: "list") -> "str":
@@ -60,7 +60,7 @@ def print_to_stdout_or_csv_file(result_data: "dict", max_top: "int", output_type
 
     if output_type == 'csv':
         out_channel.close()
-        print('created csv file {} with analysis data'.format(output_csv_file))
+        print('created file {} with analysis data'.format(output_csv_file))
 
 
 def output_results(result_data: "dict", max_top: "int", out_channel: "str"):
