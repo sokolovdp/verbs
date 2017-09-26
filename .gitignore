@@ -3,11 +3,9 @@ migrations/
 .idea/
 __pycache__/
 
-
 #ignore files
 *.sqlite3
 *.bak
 *.bat
 old_code.py
-
 
