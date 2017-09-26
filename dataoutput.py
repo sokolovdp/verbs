@@ -63,8 +63,8 @@ def print_to_stdout_or_csv_file(result_data: "dict", max_top: "int", output_type
         print('created csv file {} with analysis data'.format(output_csv_file))
 
 
-def output_results(result_data: "dict", max_top: "int", out_channel):
+def output_results(result_data: "dict", max_top: "int", out_channel: "str"):
     if out_channel in ['con', 'csv']:
-        print_to_stdout_or_csv_file(result_data, max_top, "con")
+        print_to_stdout_or_csv_file(result_data, max_top, out_channel)
     else:
         write_json_file(result_data)
