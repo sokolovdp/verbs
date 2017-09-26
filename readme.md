@@ -1,4 +1,4 @@
-# verbs_usage
+# CodeAnalysator
 
 **codeanalysator.py** check folder with source code files to check usage 
 of english verbs and nouns in functions and variables names
