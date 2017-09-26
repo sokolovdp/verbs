@@ -1,6 +1,7 @@
 # ignore folders
 migrations/
 .idea/
+test/
 __pycache__/
 
 #ignore files
