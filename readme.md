@@ -1,6 +1,6 @@
 # CodeAnalysator
 
-**codeanalysator.py** checks folder (or GitHub repo) with source code files to check usage 
+**codeanalysator.py** scans folder (or cloned GitHub repo) with source code files to check usage 
 of english verbs and nouns in functions and variables names.
 Results of analysis can be printed to console, or dumped into the file in CSV 
 or JSON format. 
@@ -21,10 +21,15 @@ optional arguments:
   --out OUT_TYPE  out results to JSON file, CSV file, or CONsole
 ```
 
-## Sample output when run as standalone program
+## Use as standalone program
 ```
 python codeanalysator.py --dir=test --out=con --ext=.py
+or
+python codeanalysator.py --repo=https://github.com/username/reponame  --out=json --ext=.java
 
+```
+## Sample output to console
+```
 Totals
 top verbs in func -> ('get' 5) ('load' 3) ('make' 2) ('scrape' 2) ('remove' 1)
 top nouns in func -> ('page' 6) ('proxy' 3) ('rating' 2) ('response' 2) ('current' 1)
@@ -49,7 +54,7 @@ python>=3.6.1
 nltk==3.2.4
 chardet==3.0.4
 ```
-To load code from GiHub, local Git client must be installed!
+To load code from GiHub, local **Git** client must be installed!
 
 ## NLTK and WORDNET dictionary installation
 ```
