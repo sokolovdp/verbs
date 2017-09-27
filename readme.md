@@ -48,8 +48,8 @@ top nouns in vars -> ('url' 5) ('movie' 4) ('pattern' 4) ('id' 1) ('title' 1)
 python>=3.6.1
 nltk==3.2.4
 chardet==3.0.4
-To load code from GiHub, local Git client must be installed !
 ```
+To load code from GiHub, local Git client must be installed!
 
 ## NLTK and WORDNET dictionary installation
 ```
