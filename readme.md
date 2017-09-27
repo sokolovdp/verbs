@@ -1,7 +1,7 @@
 # CodeAnalysator
 
-**codeanalysator.py** check folder with source code files to check usage 
-of english verbs and nouns in functions and variables names
+**codeanalysator.py** checks folder (GitHub repo) with source code files to check usage 
+of english verbs and nouns in functions and variables names.
 Results of analysis can be printed to console, or dumped into the file in CSV 
 or JSON format. 
 
