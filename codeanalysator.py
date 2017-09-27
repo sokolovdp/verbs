@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
     source = ap.add_mutually_exclusive_group(required=True)  # two main parameters: folder or github repo
     source.add_argument("--repo", dest="repo", action="store", type=check_github_url_validity,
-                        help="github(or gist) public repo to clone and analyse")
+                        help="github(or gist) public repo URL to clone and analyse")
     source.add_argument("--dir", dest="folder", action="store", type=check_folder_is_readable,
                         help="folder with code to analyse")
 
