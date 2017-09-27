@@ -7,25 +7,18 @@ or JSON format.
 
 ## Usage
 ```
-usage: codeanalysator.py [-h] [--ext CODE_EXT] [--top MAX_TOP] [--vb] [--nn]
-                         [--vrbl] [--func] [--out OUT_TYPE]
-                         folder
+usage: codeanalysator.py [-h] (--repo REPO | --dir FOLDER) [--ext CODE_EXT]
+                         [--top MAX_TOP] [--out OUT_TYPE]
 
 analyses use of verbs and noon in variables and functions names
 
-positional arguments:
-  folder          folder with code to analyse
-
 optional arguments:
-  --help          show this help message and exit
+  -h, --help      show this help message and exit
+  --repo REPO     github(or gist) public repo to clone and analyse
+  --dir FOLDER    folder with code to analyse
   --ext CODE_EXT  extension of files with code
-  --top MAX_TOP   number of top used words
-  --vb            check usage of verbs
-  --nn            check usage of nouns
-  --vrbl          check variables names
-  --func          check functions names
+  --top MAX_TOP   number of top used words, default=5
   --out OUT_TYPE  out results to JSON file, CSV file, or CONsole
-
 ```
 
 ## Sample output when run as standalone program
