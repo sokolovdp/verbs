@@ -23,21 +23,23 @@ optional arguments:
 
 ## Sample output when run as standalone program
 ```
-Totals:
-=======
-top verbs in func: [('get', 21), ('list', 13), ('load', 11), ('fetch', 9), ('output', 8), ('create', 6), ('parse', 5)]
-top nouns in func: [('page', 16), ('user', 9), ('movie', 8), ('rating', 8), ('console', 6), ('sort', 4), ('file', 4)]
-top verbs in vars: [('list', 19), ('count', 14), ('search', 4), ('out', 2), ('load', 2), ('log', 2), ('sleep', 2)]
-top nouns in vars: [('movie', 35), ('url', 27), ('film', 20), ('page', 19), ('rating', 13), ('raw', 12), ('id', 11)]
-Details:
-========
-   test\cinemas.py:
-     top verbs in func: [('get', 5), ('scrape', 2), ('load', 1), ('make', 1), ('print', 1), ('create', 1)]
-     top nouns in func: [('page', 6), ('rating', 2), ('response', 1), ('movie', 1), ('id', 1), ('url', 1), ('year', 1)]
-     top verbs in vars: [('log', 2), ('load', 1), ('list', 1), ('search', 1)]
-     top nouns in vars: [('movie', 6), ('page', 5), ('text', 3), ('url', 3), ('rating', 3), ('year', 2), ('file', 2)]
+Totals
+top verbs in func -> ('get' 5) ('load' 3) ('make' 2) ('scrape' 2) ('remove' 1)
+top nouns in func -> ('page' 6) ('proxy' 3) ('rating' 2) ('response' 2) ('current' 1)
+top verbs in vars -> ('log' 2) ('load' 2) ('sleep' 2) ('search' 1) ('live' 1)
+top nouns in vars -> ('url' 13) ('movie' 10) ('page' 5) ('rating' 4) ('proxy' 4)
+Details
+test\cinemas.py
+top verbs in func -> ('get' 5) ('scrape' 2) ('print' 1) ('load' 1) ('create' 1)
+top nouns in func -> ('page' 6) ('rating' 2) ('main' 1) ('movie' 1) ('id' 1)
+top verbs in vars -> ('log' 2) ('search' 1) ('load' 1) ('list' 1)
+top nouns in vars -> ('movie' 6) ('page' 5) ('rating' 3) ('url' 3) ('text' 3)
+test\constants.py
+top verbs in func -> 
+top nouns in func -> 
+top verbs in vars -> ('sleep' 2)
+top nouns in vars -> ('url' 5) ('movie' 4) ('pattern' 4) ('id' 1) ('title' 1)
 ```
-
 
 ## Requirements
 ```
